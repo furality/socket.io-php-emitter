@@ -1,6 +1,6 @@
 # goez/socket.io-php-emitter [![Build Status](https://travis-ci.org/goez-tools/socket.io-php-emitter.svg?branch=master)](https://travis-ci.org/goez-tools/socket.io-php-emitter)
 
-A PHP implementation of node.js socket.io-emitter (0.1.2).
+A PHP implementation of node.js socket.io-emitter.
 
 ## Installation
 
@@ -12,11 +12,11 @@ composer require goez/socket.io-php-emitter
 
 ### Emit payload message
 ```php
-use Predis;
-use Goez\SocketIO;
+use Predis\Client;
+use Goez\SocketIO\Emitter;
 ...
 
-$client = new Predis\Client();
+$client = new Client();
 
 (new Emitter($client))
     ->of('namespace')->emit('event', 'payload message');
@@ -30,11 +30,11 @@ Possible flags
 
 #### To use flags, just call it like in examples bellow
 ```php
-use Predis;
-use Goez\SocketIO;
+use Predis\Client;
+use Goez\SocketIO\Emitter;
 ...
 
-$client = new Predis\Client();
+$client = new Client();
 
 (new Emitter($client))
     ->broadcast->emit('broadcast-event', 'payload message');
@@ -45,11 +45,11 @@ $client = new Predis\Client();
 
 ### Emit an object
 ```php
-use Predis;
-use Goez\SocketIO;
+use Predis\Client;
+use Goez\SocketIO\Emitter;
 ...
 
-$client = new Predis\Client();
+$client = new Client();
 
 (new Emitter($client))
     ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2', ]);
@@ -57,11 +57,11 @@ $client = new Predis\Client();
 
 ### Emit an object in a rooms
 ```php
-use Predis;
-use Goez\SocketIO;
+use Predis\Client;
+use Goez\SocketIO\Emitter;
 ...
 
-$client = new Predis\Client();
+$client = new Client();
 
 (new Emitter($client))
     ->in(['room1', 'room2'])
