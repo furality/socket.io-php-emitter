@@ -15,7 +15,10 @@ use Goez\SocketIO\Constants\Emitter\Flag;
 
 /**
  * Class Emitter
- * @package Shakahl\SocketIO
+ * @package Goez\SocketIO
+ * @property-read Emitter $json
+ * @property-read Emitter $volatile
+ * @property-read Emitter $broadcast
  */
 class Emitter
 {
@@ -141,26 +144,25 @@ class Emitter
     /**
      * Set flags with magic method
      *
-     * @param  int $flag
+     * @param  string $flag
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function __get($flag)
     {
-        return $this->flag();
+        return $this->flag($flag);
     }
 
     /**
      * Set flags
      *
-     * @param  int $flag
+     * @param  string $flag
      * @return $this
      * @throws \InvalidArgumentException
      */
     public function flag($flag = null)
     {
-
-        if (!array_key_exists($flag, $this->validFlags)) {
+        if (!in_array($flag, $this->validFlags, true)) {
             throw new \InvalidArgumentException('Invalid socket.io flag used: ' . $flag);
         }
 

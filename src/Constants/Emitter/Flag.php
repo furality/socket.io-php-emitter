@@ -23,10 +23,10 @@ class Flag
     /**
      * @var string
      */
-    const VOLATILE = 'json';
+    const VOLATILE = 'volatile';
 
     /**
      * @var string
      */
-    const BROADCAST = 'json';
+    const BROADCAST = 'broadcast';
 }
