@@ -1,5 +1,4 @@
-goez/socket.io-php-emitter
-=====================
+# goez/socket.io-php-emitter [![Build Status](https://travis-ci.org/goez-tools/socket.io-php-emitter.svg?branch=master)](https://travis-ci.org/goez-tools/socket.io-php-emitter)
 
 A PHP implementation of node.js socket.io-emitter (0.1.2).
 
