@@ -6,12 +6,12 @@
  * @license MIT
  */
 
-namespace Shakahl\SocketIO;
+namespace Goez\SocketIO;
 
 use MessagePack\Packer;
 use Predis;
-use Shakahl\SocketIO\Constants\Emitter\Type;
-use Shakahl\SocketIO\Constants\Emitter\Flag;
+use Goez\SocketIO\Constants\Emitter\Type;
+use Goez\SocketIO\Constants\Emitter\Flag;
 
 /**
  * Class Emitter

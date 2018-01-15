@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Shakahl\SocketIO\Constants\Emitter;
+namespace Goez\SocketIO\Constants\Emitter;
 
 /**
  * Class Type
