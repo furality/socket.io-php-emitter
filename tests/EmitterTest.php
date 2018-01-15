@@ -2,8 +2,6 @@
 
 namespace Tests;
 
-use Goez\SocketIO\Constants\Emitter\Flag;
-use Goez\SocketIO\Constants\Emitter\Type;
 use Goez\SocketIO\Emitter;
 use Mockery;
 use Mockery\MockInterface;
@@ -43,7 +41,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
     public function it_should_use_flag()
     {
         (new Emitter($this->mockClient))
-            ->flag(Flag::BROADCAST)->emit('broadcast-event', 'payload message');
+            ->flag(Emitter::FLAG_BROADCAST)->emit('broadcast-event', 'payload message');
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
     }
@@ -110,7 +108,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
     public function it_should_emit_an_object_in_binary_type()
     {
         (new Emitter($this->mockClient))
-            ->type(Type::BINARY_EVENT)
+            ->type(Emitter::EVENT_TYPE_BINARY)
             ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2',]);
         $this->mockClient->shouldHaveReceived('publish')
             ->once();

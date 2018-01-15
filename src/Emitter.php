@@ -11,8 +11,6 @@ namespace Goez\SocketIO;
 
 use MessagePack\Packer;
 use Predis;
-use Goez\SocketIO\Constants\Emitter\Type;
-use Goez\SocketIO\Constants\Emitter\Flag;
 
 /**
  * Class Emitter
@@ -23,6 +21,31 @@ use Goez\SocketIO\Constants\Emitter\Flag;
  */
 class Emitter
 {
+    /**
+     * @var int
+     */
+    const EVENT_TYPE_REGULAR = 2;
+
+    /**
+     * @var int
+     */
+    const EVENT_TYPE_BINARY = 5;
+
+    /**
+     * @var
+     */
+    const FLAG_JSON = 'json';
+
+    /**
+     * @var string
+     */
+    const FLAG_VOLATILE = 'volatile';
+
+    /**
+     * @var string
+     */
+    const FLAG_BROADCAST = 'broadcast';
+
     /**
      * Default namespace
      *
@@ -91,9 +114,9 @@ class Emitter
         $this->reset();
 
         $this->validFlags = [
-            Flag::JSON,
-            Flag::VOLATILE,
-            Flag::BROADCAST,
+            self::FLAG_JSON,
+            self::FLAG_VOLATILE,
+            self::FLAG_BROADCAST,
         ];
     }
 
@@ -178,7 +201,7 @@ class Emitter
      * @param  int $type
      * @return $this
      */
-    public function type($type = Type::REGULAR_EVENT)
+    public function type($type = self::EVENT_TYPE_REGULAR)
     {
         $this->type = $type;
 
@@ -207,7 +230,7 @@ class Emitter
         $message = $this->packer->pack([$this->uid, $packet, $options]);
 
         // hack buffer extensions for msgpack with binary
-        if ($this->type === Type::BINARY_EVENT) {
+        if ($this->type === self::EVENT_TYPE_BINARY) {
             $message = str_replace([
                 pack('c', 0xda),
                 pack('c', 0xdb)
@@ -240,7 +263,7 @@ class Emitter
         $this->rooms = [];
         $this->flags = [];
         $this->namespace = self::DEFAULT_NAMESPACE;
-        $this->type = Type::REGULAR_EVENT;
+        $this->type = self::EVENT_TYPE_REGULAR;
         return $this;
     }
 }
