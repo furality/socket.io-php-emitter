@@ -5,27 +5,28 @@
  * @author Anton Pavlov <anton.pavlov.it@gmail.com>
  * @license MIT
  */
+
 namespace Shakahl\SocketIO\Constants\Emitter;
 
 /**
  * Class Flag
- * 
+ *
  * @package Shakahl\SocketIO\Constants\Emitter
  */
 class Flag
 {
-	/**
-	 * @var string
-	 */
+    /**
+     * @var string
+     */
     const JSON = 'json';
 
     /**
-	 * @var string
-	 */
+     * @var string
+     */
     const VOLATILE = 'json';
 
     /**
-	 * @var string
-	 */
+     * @var string
+     */
     const BROADCAST = 'json';
 }

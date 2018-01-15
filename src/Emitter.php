@@ -5,6 +5,7 @@
  * @author Anton Pavlov <anton.pavlov.it@gmail.com>
  * @license MIT
  */
+
 namespace Shakahl\SocketIO;
 
 use MessagePack\Packer;
@@ -73,9 +74,10 @@ class Emitter
 
     /**
      * Emitter constructor.
-     * 
+     *
      * @param Predis\Client $client
      * @param string $prefix
+     * @throws \InvalidArgumentException
      */
     public function __construct(Predis\Client $client, $prefix = 'socket.io')
     {
@@ -94,7 +96,7 @@ class Emitter
     /**
      * Set room
      *
-     * @param  string $room
+     * @param  string|array $room
      * @return $this
      */
     public function in($room)
@@ -107,15 +109,15 @@ class Emitter
             return $this;
         }
         //single
-        if (!in_array($room, $this->rooms)) {
-            array_push($this->rooms, $room);
+        if (!in_array($room, $this->rooms, true)) {
+            $this->rooms[] = $room;
         }
         return $this;
     }
 
     /**
      * Alias for in
-     * 
+     *
      * @param  string $room
      * @return $this
      */
@@ -141,6 +143,7 @@ class Emitter
      *
      * @param  int $flag
      * @return $this
+     * @throws \InvalidArgumentException
      */
     public function __get($flag)
     {
@@ -152,9 +155,11 @@ class Emitter
      *
      * @param  int $flag
      * @return $this
+     * @throws \InvalidArgumentException
      */
-    public function flag($flag) {
-        
+    public function flag($flag = null)
+    {
+
         if (!array_key_exists($flag, $this->validFlags)) {
             throw new \InvalidArgumentException('Invalid socket.io flag used: ' . $flag);
         }
@@ -166,7 +171,7 @@ class Emitter
 
     /**
      * Set type
-     * 
+     *
      * @param  int $type
      * @return $this
      */
@@ -187,7 +192,7 @@ class Emitter
         $packet = [
             'type' => $this->type,
             'data' => func_get_args(),
-            'nsp'  => $this->namespace,
+            'nsp' => $this->namespace,
         ];
 
         $options = [
@@ -200,8 +205,13 @@ class Emitter
 
         // hack buffer extensions for msgpack with binary
         if ($this->type === Type::BINARY_EVENT) {
-            $message = str_replace(pack('c', 0xda), pack('c', 0xd8), $message);
-            $message = str_replace(pack('c', 0xdb), pack('c', 0xd9), $message);
+            $message = str_replace([
+                pack('c', 0xda),
+                pack('c', 0xdb)
+            ], [
+                pack('c', 0xd8),
+                pack('c', 0xd9)
+            ], $message);
         }
 
         // publish
@@ -224,10 +234,10 @@ class Emitter
      */
     protected function reset()
     {
-        $this->rooms     = [];
-        $this->flags     = [];
+        $this->rooms = [];
+        $this->flags = [];
         $this->namespace = self::DEFAULT_NAMESPACE;
-        $this->type      = Type::REGULAR_EVENT;
+        $this->type = Type::REGULAR_EVENT;
         return $this;
     }
 }
