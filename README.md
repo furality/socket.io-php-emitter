@@ -1,18 +1,20 @@
-shakahl/socket.io-php-emitter
+goez/socket.io-php-emitter
 =====================
 
-A PHP implementation of node.js socket.io-emitter (0.1.0).
+A PHP implementation of node.js socket.io-emitter (0.1.2).
 
 ## Installation
 
-composer require shakahl/socket.io-php-emitter
+```bash
+composer require goez/socket.io-php-emitter
+```
 
 ## Usage
 
 ### Emit payload message
 ```php
 use Predis;
-use Shakahl\SocketIO;
+use Goez\SocketIO;
 ...
 
 $client = new Predis\Client();
@@ -30,7 +32,7 @@ Possible flags
 #### To use flags, just call it like in examples bellow
 ```php
 use Predis;
-use Shakahl\SocketIO;
+use Goez\SocketIO;
 ...
 
 $client = new Predis\Client();
@@ -45,7 +47,7 @@ $client = new Predis\Client();
 ### Emit an object
 ```php
 use Predis;
-use Shakahl\SocketIO;
+use Goez\SocketIO;
 ...
 
 $client = new Predis\Client();
@@ -57,7 +59,7 @@ $client = new Predis\Client();
 ### Emit an object in a rooms
 ```php
 use Predis;
-use Shakahl\SocketIO;
+use Goez\SocketIO;
 ...
 
 $client = new Predis\Client();
@@ -69,5 +71,5 @@ $client = new Predis\Client();
 
 ## Credits
 
-This library is forked from [exls/socket.io-emitter](https://github.com/exls/socket.io-emitter) created by Anton Pavlov.
+This library is forked from [shakahl/socket.io-emitter](https://github.com/shakahl/socket.io-emitter) created by Soma Szélpál. And [shakahl/socket.io-emitter](https://github.com/shakahl/socket.io-emitter) is forked from [exls/socket.io-emitter](https://github.com/exls/socket.io-emitter) created by Anton Pavlov.
 

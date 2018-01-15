@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @author Jace Ju <jaceju@gmail.com>
  * @author Soma Szélpál <szelpalsoma@gmail.com>
  * @author Anton Pavlov <anton.pavlov.it@gmail.com>
  * @license MIT
