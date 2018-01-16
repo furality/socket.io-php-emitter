@@ -55,7 +55,7 @@ $client = new Client();
     ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2', ]);
 ```
 
-### Emit an object in a rooms
+### Emit an object in multiple rooms
 ```php
 use Predis\Client;
 use Goez\SocketIO\Emitter;
@@ -70,5 +70,7 @@ $client = new Client();
 
 ## Credits
 
-This library is forked from [shakahl/socket.io-emitter](https://github.com/shakahl/socket.io-emitter) created by Soma Szélpál. And [shakahl/socket.io-emitter](https://github.com/shakahl/socket.io-emitter) is forked from [exls/socket.io-emitter](https://github.com/exls/socket.io-emitter) created by Anton Pavlov.
+This library is forked from [shakahl/socket.io-emitter](https://github.com/shakahl/socket.io-emitter) created by Soma Szélpál.
+
+The [shakahl/socket.io-emitter](https://github.com/shakahl/socket.io-emitter) is forked from [exls/socket.io-emitter](https://github.com/exls/socket.io-emitter) created by Anton Pavlov.
 
