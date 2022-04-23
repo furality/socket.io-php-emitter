@@ -1,11 +1,10 @@
-# goez/socket.io-php-emitter [![Build Status](https://travis-ci.org/goez-tools/socket.io-php-emitter.svg?branch=master)](https://travis-ci.org/goez-tools/socket.io-php-emitter)
-
+# Furality/socket.io-php-emitter [![Build Status](https://github.com/furality/socket.io-php-emitter/actions/workflows/test.yml/badge.svg)](https://github.com/furality/socket.io-php-emitter/actions/workflows/test.yml)
 A PHP implementation of node.js socket.io-emitter.
 
 ## Installation
 
 ```bash
-composer require goez/socket.io-php-emitter
+composer require Furality/socket.io-php-emitter
 ```
 
 ## Usage
@@ -13,7 +12,7 @@ composer require goez/socket.io-php-emitter
 ### Emit payload message
 ```php
 use Predis\Client;
-use Goez\SocketIO\Emitter;
+use Furality\SocketIO\Emitter;
 ...
 
 $client = new Client();
@@ -31,7 +30,7 @@ Possible flags
 #### To use flags, just call it like in examples bellow
 ```php
 use Predis\Client;
-use Goez\SocketIO\Emitter;
+use Furality\SocketIO\Emitter;
 ...
 
 $client = new Client();
@@ -46,7 +45,7 @@ $client = new Client();
 ### Emit an object
 ```php
 use Predis\Client;
-use Goez\SocketIO\Emitter;
+use Furality\SocketIO\Emitter;
 ...
 
 $client = new Client();
@@ -58,7 +57,7 @@ $client = new Client();
 ### Emit an object in multiple rooms
 ```php
 use Predis\Client;
-use Goez\SocketIO\Emitter;
+use Furality\SocketIO\Emitter;
 ...
 
 $client = new Client();
