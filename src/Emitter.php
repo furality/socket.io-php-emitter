@@ -4,17 +4,18 @@
  * @author Jace Ju <jaceju@gmail.com>
  * @author Soma Szélpál <szelpalsoma@gmail.com>
  * @author Anton Pavlov <anton.pavlov.it@gmail.com>
+ * @author Kakious <kakious@kakio.us>
  * @license MIT
  */
 
-namespace Goez\SocketIO;
+namespace Furality\SocketIO;
 
 use MessagePack\Packer;
 use Predis;
 
 /**
  * Class Emitter
- * @package Goez\SocketIO
+ * @package Furality\SocketIO
  * @property-read Emitter $json
  * @property-read Emitter $volatile
  * @property-read Emitter $broadcast
@@ -32,7 +33,7 @@ class Emitter
     const EVENT_TYPE_BINARY = 5;
 
     /**
-     * @var
+     * @var string
      */
     const FLAG_JSON = 'json';
 
@@ -126,7 +127,7 @@ class Emitter
      * @param  string|array $room
      * @return $this
      */
-    public function in($room)
+    public function in($room): self
     {
         //multiple
         if (is_array($room)) {
@@ -148,7 +149,7 @@ class Emitter
      * @param  string $room
      * @return $this
      */
-    public function to($room)
+    public function to($room): self
     {
         return $this->in($room);
     }
@@ -159,7 +160,7 @@ class Emitter
      * @param  string $namespace
      * @return $this
      */
-    public function of($namespace)
+    public function of($namespace): self
     {
         $this->namespace = $namespace;
         return $this;
@@ -172,7 +173,7 @@ class Emitter
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function __get($flag)
+    public function __get($flag): self
     {
         return $this->flag($flag);
     }

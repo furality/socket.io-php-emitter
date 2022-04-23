@@ -2,24 +2,25 @@
 
 namespace Tests;
 
-use Goez\SocketIO\Emitter;
+use Furality\SocketIO\Emitter;
 use Mockery;
 use Mockery\MockInterface;
+use PHPUnit\Framework\TestCase;
 use Predis\Client;
 
-class EmitterTest extends \PHPUnit_Framework_TestCase
+class EmitterTest extends TestCase
 {
     /**
      * @var MockInterface|Client
      */
     private $mockClient;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->mockClient = Mockery::spy(Client::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Mockery::close();
     }
@@ -33,6 +34,8 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->of('namespace')->emit('event', 'payload message');
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
+        
+        $this->assertTrue(true);
     }
 
     /**
@@ -44,6 +47,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->flag(Emitter::FLAG_BROADCAST)->emit('broadcast-event', 'payload message');
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
+            $this->assertTrue(true);
     }
 
     /**
@@ -55,6 +59,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->broadcast->emit('broadcast-event', 'payload message');
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
+            $this->assertTrue(true);
     }
 
     /**
@@ -63,6 +68,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_throw_exception_with_invalid_flag()
     {
+        $this->expectException(\InvalidArgumentException::class);
         (new Emitter($this->mockClient))
             ->flag('wtf')->emit('broadcast-event', 'payload message');
     }
@@ -76,6 +82,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2',]);
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
+        $this->assertTrue(true);
     }
 
     /**
@@ -88,6 +95,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2',]);
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
+        $this->assertTrue(true);
     }
 
     /**
@@ -100,6 +108,7 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2',]);
         $this->mockClient->shouldHaveReceived('publish')
             ->twice();
+        $this->assertTrue(true);
     }
 
     /**
@@ -112,5 +121,6 @@ class EmitterTest extends \PHPUnit_Framework_TestCase
             ->emit('broadcast-event', ['param1' => 'value1', 'param2' => 'value2',]);
         $this->mockClient->shouldHaveReceived('publish')
             ->once();
+        $this->assertTrue(true);
     }
 }

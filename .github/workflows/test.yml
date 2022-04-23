@@ -1,0 +1,35 @@
+name: test
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-composer
+        with:
+          path: vendor
+          key: ${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+            ${{ env.cache-name }}-
+            ${{ runner.os }}-
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: redis
+
+      - name: Install Dependencies
+        run: composer install
+      -
+        name: Run tests
+        run: composer test-verbose
